@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">vendingMachine</string>
+    <string name="title_activity_product_info">ProductInfo</string>
+</resources>
