@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import java.lang.reflect.Array;
@@ -61,7 +62,10 @@ public class MainActivity extends AppCompatActivity {
         adapter = new Adapter(this,list);
         adapter.notifyDataSetChanged();
 
-        ListView listView = findViewById(R.id.listview1);
+        GridView listView = findViewById(R.id.listview1);
+        listView.setNumColumns(3);
+        int height = listView.getHeight();
+
         listView.setAdapter(adapter);
     }
 }

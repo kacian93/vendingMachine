@@ -43,13 +43,17 @@ public class EditProduct extends AppCompatActivity {
         }
     }//onCreate;
 
+    @Override
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
+    }
+
     public void BtnClick(View view){
         db= new DBExecute(this);
         final Product product = changeType();
-        Log.d("test","add click");
         if(idx==0){
             db.insertProduct(product);
-            Log.d("test","insert okay");
         }else{
             db.editProduct(product);
         }
