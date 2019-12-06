@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    tools:context=".PopupCoin">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foregroundGravity="center"
+        android:rowCount="4">
+
+        <Button
+            android:id="@+id/coin10"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/round_coner"
+            android:text="10円" />
+
+        <Button
+            android:id="@+id/coin50"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/round_coner"
+            android:text="50円" />
+
+        <Button
+            android:id="@+id/coin100"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/round_coner"
+            android:text="100円" />
+
+        <Button
+            android:id="@+id/coin500"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/round_coner"
+            android:text="500円" />
+    </GridLayout>
+</RelativeLayout>
