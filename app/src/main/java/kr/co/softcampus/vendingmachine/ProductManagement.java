@@ -67,7 +67,6 @@ public class ProductManagement extends AppCompatActivity {
     public void showList(){
         dbExecute = new DBExecute(this);
         list = dbExecute.showAllList();
-        Log.d("test","list : "+list.get(0).getName());
 
         recyclerAdapter = new RecyclerAdapter(list);
         recyclerAdapter.notifyDataSetChanged();

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="5dp"
     tools:context=".PopupCoin">
 
     <GridLayout
@@ -14,30 +16,52 @@
 
         <Button
             android:id="@+id/coin10"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
             android:background="@drawable/round_coner"
+            android:onClick="clickCash"
             android:text="10円" />
 
         <Button
             android:id="@+id/coin50"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
             android:background="@drawable/round_coner"
+            android:onClick="clickCash"
             android:text="50円" />
 
         <Button
             android:id="@+id/coin100"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
             android:background="@drawable/round_coner"
+            android:onClick="clickCash"
             android:text="100円" />
 
         <Button
             android:id="@+id/coin500"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
             android:background="@drawable/round_coner"
+            android:onClick="clickCash"
             android:text="500円" />
+
     </GridLayout>
-</RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:onClick="clickClose"
+            android:text="閉じる" />
+    </RelativeLayout>
+</LinearLayout>

@@ -1,18 +1,22 @@
 package kr.co.softcampus.vendingmachine;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -23,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Product> list= null;
     Adapter adapter = null;
     DBExecute db;
-
+    TextView message_text, cash_text;
+    static int cash = 0;
     Button coin, cancel;
 
     @Override
@@ -33,17 +38,26 @@ public class MainActivity extends AppCompatActivity {
 
         coin = findViewById(R.id.coin);
         cancel = findViewById(R.id.cancel);
+        cash_text = findViewById(R.id.cash_text);
+        message_text = findViewById(R.id.message_text);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setTitle("自動機シミュレーター");
         showList();
+
+//        AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                    }
+//                };
     }
+
     public void clickBtn(View view){
         switch (view.getId()){
             case R.id.coin:
                 Intent intent = new Intent(this, PopupCoin.class);
-                intent.putExtra("cash",0);
+                intent.putExtra("cash",cash);
                 startActivityForResult(intent,REQUEST_COIN);
                 break;
         }
@@ -80,8 +94,27 @@ public class MainActivity extends AppCompatActivity {
 
         GridView listView = findViewById(R.id.listview1);
         listView.setNumColumns(3);
-        int height = listView.getHeight();
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
         listView.setAdapter(adapter);
+
+
+        cash_text.setText(cash+"");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode==REQUEST_COIN){
+            if(resultCode ==RESULT_OK){
+                cash = data.getIntExtra("cash",0);
+                Log.d("test",cash+"");
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

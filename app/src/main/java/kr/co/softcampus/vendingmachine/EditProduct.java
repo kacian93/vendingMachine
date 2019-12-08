@@ -14,10 +14,9 @@ public class EditProduct extends AppCompatActivity {
     EditText pName;
     EditText pPrice;
     EditText pCount;
-    int price, count, idx;
-    String name;
     Button save;
     DBExecute db;
+    Product product;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,12 +33,15 @@ public class EditProduct extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
 
         final Intent intent = getIntent();
-        final Product product = intent.getParcelableExtra("product");
+        product = intent.getParcelableExtra("product");
         int idx =product==null?0:product.getIdx();
         if(idx ==0){
             actionBar.setTitle("商品情報");
         }else{
             actionBar.setTitle("商品情報(No."+idx+")");
+            pName.setText(product.getName());
+            pPrice.setText(product.getPrice()+"");
+            pCount.setText(product.getCount()+"");
         }
     }//onCreate;
 
@@ -51,27 +53,21 @@ public class EditProduct extends AppCompatActivity {
 
     public void BtnClick(View view){
         db= new DBExecute(this);
-        final Product product = changeType();
-        if(idx==0){
-            db.insertProduct(product);
+
+        int price = Integer.parseInt(pPrice.getText().toString());
+        int count = Integer.parseInt(pCount.getText().toString());
+        String name = pName.getText().toString();
+
+        if(product==null){
+            Product eProduct = new Product(price, count, name);
+
+            db.insertProduct(eProduct);
         }else{
-            db.editProduct(product);
+            int idx = product.getIdx();
+            Product eProduct = new Product(price, count, name, idx);
+             db.editProduct(eProduct);
         }
         finish();
     }
 
-    public Product changeType(){
-        Product product = null;
-
-        price = Integer.parseInt(pPrice.getText().toString());
-        count = Integer.parseInt(pCount.getText().toString());
-        name = pName.getText().toString();
-        if(idx==0){
-           product = new Product(price,count,name);
-        }else{
-            product = new Product(price, count, name,idx);
-        }
-
-        return product;
-    }
 }

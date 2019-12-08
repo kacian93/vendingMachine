@@ -3,6 +3,7 @@ package kr.co.softcampus.vendingmachine;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.PorterDuff;
 import android.util.Log;
 
 import java.lang.reflect.Array;
@@ -18,7 +19,6 @@ public class DBExecute  {
     public SQLiteDatabase openDB(){
         final DBHelper dbHelper = new DBHelper(context);
         final SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Log.d("test","db open");
         return db;
     }
 
@@ -34,9 +34,17 @@ public class DBExecute  {
     }
 
     public void editProduct(Product product) {
+        final SQLiteDatabase db= openDB();
+
+        final String sql ="UPDATE product SET count = ?, price=? , name=?" +
+                "WHERE idx = ?";
+
+        Object [] data = {product.getCount(), product.getPrice(),product.getName(),product.getIdx()};
+        db.execSQL(sql,data);
+
+        db.close();
     }
     public ArrayList<Product> showAllList(){
-        Log.d("test","showAllList");
         final SQLiteDatabase db = openDB();
         final String sql = "select * from product";
 
@@ -56,12 +64,23 @@ public class DBExecute  {
             final String name = c.getString(cname);
 
             p= new Product(price,count,name,idx);
-            Log.d("test",p.getIdx()+" ");
 
             list.add(p);
 
         }
+        c.close();
+        db.close();
+
         return list;
 
+    }
+
+    public void sellProduct(Product product){
+        final SQLiteDatabase db = openDB();
+        final String sql = "UPDATE product SET count = ? where idx = ? ";
+        Object [] data = {product.getCount(),product.getIdx()};
+
+        db.execSQL(sql, data);
+        db.close();
     }
 }
