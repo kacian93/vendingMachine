@@ -92,13 +92,13 @@ public class MainActivity extends AppCompatActivity {
         adapter = new Adapter(this,list);
         adapter.notifyDataSetChanged();
 
-        GridView listView = findViewById(R.id.listview1);
+        final GridView listView = findViewById(R.id.listview1);
         listView.setNumColumns(3);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                listView.deferNotifyDataSetChanged();
             }
         });
         listView.setAdapter(adapter);

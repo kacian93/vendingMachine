@@ -60,8 +60,8 @@ public class Adapter extends BaseAdapter {
 
             if(p.getCount()!=0) {
                 nameMain.setText(p.getName());
-                priceMain.setText(p.getPrice() + "");
-                countMain.setText(p.getCount() + "");
+                priceMain.setText(p.getPrice() + "円");
+                countMain.setText(p.getCount() + "個");
                 list_item.setBackgroundResource(android.R.color.holo_green_light);
 
                 v.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +71,7 @@ public class Adapter extends BaseAdapter {
                         if (p.getCount() > 1) {
                             p.setCount(p.getCount() - 1);
                             if (v.getId() == R.id.countMain) {
-                                countMain.setText(p.getCount() + "");
+                                countMain.setText(p.getCount() + "個");
                             }
                             dbExecute.sellProduct(p);
                         } else if (p.getCount() == 1) {
@@ -80,8 +80,8 @@ public class Adapter extends BaseAdapter {
                         }//else if
                         else {
                             nameMain.setText("品切り");
-                            priceMain.setText(p.getPrice() + "");
-                            countMain.setText("0");
+                            priceMain.setText(p.getPrice() + "円");
+                            countMain.setText("0個");
                             list_item.setBackgroundResource(android.R.color.holo_orange_light);
                             p.setCount(0);
                         }//setonClick
@@ -98,8 +98,8 @@ public class Adapter extends BaseAdapter {
 //            }
             else{
                 nameMain.setText("品切り");
-                priceMain.setText(p.getPrice() + "");
-                countMain.setText("0");
+                priceMain.setText(p.getPrice() + "円");
+                countMain.setText("0個");
                 list_item.setBackgroundResource(android.R.color.holo_orange_light);
             }
 
