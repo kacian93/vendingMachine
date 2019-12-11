@@ -13,6 +13,7 @@ import android.view.Window;
 
 public class PopupCoin extends AppCompatActivity {
     static int cash=0;
+    DBExecute db = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +23,8 @@ public class PopupCoin extends AppCompatActivity {
 
         setContentView(R.layout.activity_popup_coin);
 
+
+        db= new DBExecute(this);
         //dataをもらう
         Intent intent = getIntent();
         cash = intent.getIntExtra("cash",0);
@@ -43,6 +46,7 @@ public class PopupCoin extends AppCompatActivity {
         Intent intent = new Intent();
         intent.putExtra("cash",cash);
         setResult(RESULT_OK, intent);
+        db.inputCash(cash);
 
         finish();
         super.onBackPressed();

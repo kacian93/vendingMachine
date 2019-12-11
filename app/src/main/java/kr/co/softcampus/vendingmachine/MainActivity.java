@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
@@ -27,32 +28,31 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Product> list= null;
     Adapter adapter = null;
     DBExecute db;
+    GridView listView;
     TextView message_text, cash_text;
     static int cash = 0;
     Button coin, cancel;
+    final int REQUEST_LOGIN=100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        Intent intent = new Intent(this,UserLogin.class);
+//        startActivityForResult(intent,REQUEST_LOGIN);
+
         coin = findViewById(R.id.coin);
         cancel = findViewById(R.id.cancel);
         cash_text = findViewById(R.id.cash_text);
         message_text = findViewById(R.id.message_text);
+        listView= findViewById(R.id.listview1);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setTitle("自動機シミュレーター");
         showList();
-
-//        AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    }
-//                };
     }
-
     public void clickBtn(View view){
         switch (view.getId()){
             case R.id.coin:
@@ -95,13 +95,13 @@ public class MainActivity extends AppCompatActivity {
         final GridView listView = findViewById(R.id.listview1);
         listView.setNumColumns(3);
 
+        listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                listView.deferNotifyDataSetChanged();
+                adapter.notifyDataSetChanged();
             }
         });
-        listView.setAdapter(adapter);
 
 
         cash_text.setText(cash+"");

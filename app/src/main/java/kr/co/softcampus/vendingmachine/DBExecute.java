@@ -83,4 +83,9 @@ public class DBExecute  {
         db.execSQL(sql, data);
         db.close();
     }
+
+    public void inputCash(int cash) {
+        final SQLiteDatabase db= openDB();
+        final String sql = "UPDATE user SET cash = ? where idx=?";
+    }
 }
