@@ -3,10 +3,6 @@ package kr.co.softcampus.vendingmachine;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.PorterDuff;
-import android.util.Log;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DBExecute  {
@@ -87,5 +83,56 @@ public class DBExecute  {
     public void inputCash(int cash) {
         final SQLiteDatabase db= openDB();
         final String sql = "UPDATE user SET cash = ? where idx=?";
+    }
+
+
+    public boolean checkId(String user_id){
+        boolean isvaild=false;
+
+        final SQLiteDatabase db = openDB();
+        final String sql ="SELECT user_id FROM user where user_id ="+user_id;
+        final Cursor c = db.rawQuery(sql,null);
+
+        c.moveToNext();
+
+        int user_idPos= c.getColumnIndex("user_id");
+        String user_idStr = c.getString(user_idPos);
+
+        if(user_idStr==null || user_idStr.equals("") || user_idStr.length()<1){
+            isvaild=true;
+        }
+        return  isvaild;
+    }
+    public void makeUser(String user_Id, String password){
+        final SQLiteDatabase db= openDB();
+        final String sql = "INSERT INTO user(user_id, password) values (?,?)";
+        Object [] data= {user_Id,password};
+
+        db.execSQL(sql, data);
+
+    }
+    public User login(String userIdStr, String passwordStr) {
+        final SQLiteDatabase db= openDB();
+        final String sql = "SELECT * FROM user WHERE user_id = "+userIdStr+" and password = "+passwordStr;
+        User user = null;
+
+        final  Cursor c= db.rawQuery(sql, null);
+        c.moveToNext();
+
+        int uidxPos = c.getColumnIndex("idx");
+        int uUser_idPos = c.getColumnIndex("user_id");
+        int uPasswordPos = c.getColumnIndex("password");
+        int uPermissionPos = c.getColumnIndex("permission");
+        int uCashPos = c.getColumnIndex("cash");
+
+        int uidx = c.getInt(uidxPos);
+        String user_id = c.getString(uUser_idPos);
+        String password=  c.getString(uPasswordPos);
+        String permission = c.getString(uPermissionPos);
+        int cash = c.getInt(uCashPos);
+
+        user = new User(uidx, user_id, password, permission,cash);
+
+        return user;
     }
 }

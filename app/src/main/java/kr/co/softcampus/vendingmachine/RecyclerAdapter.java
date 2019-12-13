@@ -17,6 +17,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     Context context;
     private ArrayList<Product> data=null;
 
+    public RecyclerAdapter() {
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView idx;
         TextView name;

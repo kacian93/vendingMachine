@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Intent intent = new Intent(this,UserLogin.class);
-//        startActivityForResult(intent,REQUEST_LOGIN);
+        Intent intent = new Intent(this,UserLogin.class);
+        startActivityForResult(intent,REQUEST_LOGIN);
 
         coin = findViewById(R.id.coin);
         cancel = findViewById(R.id.cancel);
@@ -96,15 +96,10 @@ public class MainActivity extends AppCompatActivity {
         listView.setNumColumns(3);
 
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                adapter.notifyDataSetChanged();
-            }
-        });
 
 
-        cash_text.setText(cash+"");
+
+        cash_text.setText(cash+"円");
     }
 
     @Override
