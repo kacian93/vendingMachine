@@ -9,16 +9,53 @@ public class User implements Parcelable {
     String password;
     String permission;
     int cash;
+    String phone;
+    String email;
 
-    public User(int idx, String userId, String password, String permission, int cash) {
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public User(String userId, String password, String phone, String email) {
+        this.userId = userId;
+        this.password = password;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    public User(String userId, String password, String permission, int cash, String phone, String email) {
+        this.userId = userId;
+        this.password = password;
+        this.permission = permission;
+        this.cash = cash;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    public User(int idx, String userId, String password, String permission, int cash, String phone, String email) {
         this.idx = idx;
         this.userId = userId;
         this.password = password;
         this.permission = permission;
         this.cash = cash;
+        this.phone = phone;
+        this.email = email;
     }
 
-    public User(String userId, String password, String permission, int cash) {
+    public User(int idx, String userId, String password, String permission, int cash) {
+        this.idx = idx;
         this.userId = userId;
         this.password = password;
         this.permission = permission;

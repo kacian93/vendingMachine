@@ -10,11 +10,11 @@ import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, "product.db", null, 1);
+        super(context, "product.db", null, 2);
     }
 
     public DBHelper(Context context) {
-        super(context,"product.db",null,1);
+        super(context,"product.db",null,2);
     }
 
     @Override
@@ -33,12 +33,18 @@ public class DBHelper extends SQLiteOpenHelper {
             case 1 :
                 final String userSql= "CREATE TABLE user(" +
                         "idx integer primary key autoincrement" +
-                        ",user_id text not null" +
+                        ", user_id text not null" +
                         ", password password not null" +
-                        ",permission text check(name IN ('common','admin'))not null default 'common'" +
+                        ", permission text check(name IN ('common','admin')) not null default 'common'" +
                         ", cash integer not null default 0)";
                 db.execSQL(userSql);
-                break;
+            case 2:
+                final String alterTable1= "ALTER TABLE user ADD COLUMN phone text";
+                final String alterTable2= "ALTER TABLE user ADD COLUMN email text";
+
+                db.execSQL(alterTable1);
+                db.execSQL(alterTable2);
+
         }
     }
 }

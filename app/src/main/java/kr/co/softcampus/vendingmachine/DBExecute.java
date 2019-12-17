@@ -83,6 +83,8 @@ public class DBExecute  {
     public void inputCash(int cash) {
         final SQLiteDatabase db= openDB();
         final String sql = "UPDATE user SET cash = ? where idx=?";
+
+        db.close();
     }
 
 
@@ -101,6 +103,9 @@ public class DBExecute  {
         if(user_idStr==null || user_idStr.equals("") || user_idStr.length()<1){
             isvaild=true;
         }
+
+        c.close();
+        db.close();
         return  isvaild;
     }
     public void makeUser(String user_Id, String password){
@@ -133,6 +138,22 @@ public class DBExecute  {
 
         user = new User(uidx, user_id, password, permission,cash);
 
+
+        c.close();
+        db.close();
         return user;
+    }
+
+    public void makeUser(User user) {
+        SQLiteDatabase db = openDB();
+
+        final String sql = "INSERT INTO user(" +
+                "user_id, password, phone, email) " +
+                "VALUES (?,?,?,?)";
+        final Object [] data = {user.getUserId() ,user.getPassword(),user.getPhone(),user.getEmail()};
+
+        db.execSQL(sql,data);
+
+        db.close();
     }
 }
