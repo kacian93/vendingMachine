@@ -34,6 +34,7 @@
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="loginBtn"
         android:text="ログイン" />
     <LinearLayout
         android:id="@+id/subMenu"
@@ -46,10 +47,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:onClick="makeUser"
             android:text="会員加入"></TextView>
 
         <TextView
-            android:id="@+id/id"
+            android:id="@+id/findid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
