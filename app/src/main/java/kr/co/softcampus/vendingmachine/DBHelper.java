@@ -24,6 +24,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "name text not null," +
                 "price integer not null default 0," +
                 "count integer not null default 0)";
+
         db.execSQL(sql);
     }
 
@@ -31,11 +32,12 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         switch (oldVersion){
             case 1 :
-                final String userSql= "CREATE TABLE user(" +
-                        "idx integer primary key autoincrement" +
-                        ", user_id text not null" +
-                        ", password password not null" +
-                        ", permission text check(name IN ('common','admin')) not null default 'common'" +
+
+                final String userSql= "CREATE TABLE Person(" +
+                        " user_idx integer primary key autoincrement " +
+                        ", user_id text not null " +
+                        ", password text not null " +
+                        ", permission text check(name IN ('common' , 'admin')) not null default 'common'" +
                         ", cash integer not null default 0)";
                 db.execSQL(userSql);
             case 2:
