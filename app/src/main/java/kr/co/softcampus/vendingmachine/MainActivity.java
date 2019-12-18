@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,21 +33,19 @@ public class MainActivity extends AppCompatActivity {
     TextView message_text, cash_text;
     static int cash = 0;
     Button coin, cancel;
-    final int REQUEST_LOGIN=100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this,UserLogin.class);
-        startActivityForResult(intent,REQUEST_LOGIN);
-
         coin = findViewById(R.id.coin);
         cancel = findViewById(R.id.cancel);
         cash_text = findViewById(R.id.cash_text);
         message_text = findViewById(R.id.message_text);
         listView= findViewById(R.id.listview1);
+
+
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
@@ -89,16 +88,15 @@ public class MainActivity extends AppCompatActivity {
     public void showList(){
         db = new DBExecute(this);
         list = db.showAllList();
-        adapter = new Adapter(this,list);
+
+        MainAdapter adapter = new MainAdapter(this,list);
         adapter.notifyDataSetChanged();
 
         final GridView listView = findViewById(R.id.listview1);
         listView.setNumColumns(3);
 
         listView.setAdapter(adapter);
-
-
-
+        cash = db.checkMoney();
         cash_text.setText(cash+"円");
     }
 

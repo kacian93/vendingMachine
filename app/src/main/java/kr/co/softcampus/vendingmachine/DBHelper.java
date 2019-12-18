@@ -25,28 +25,16 @@ public class DBHelper extends SQLiteOpenHelper {
                 "price integer not null default 0," +
                 "count integer not null default 0)";
 
+        final String cashSql = "CREATE TABLE cash(cash integer primary key default 0)";
+        final  String insertMoney = "INSERT INTO CASH(cash) values (0)";
+
+
+        db.execSQL(cashSql);
+        db.execSQL(insertMoney);
         db.execSQL(sql);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        switch (oldVersion){
-            case 1 :
-
-                final String userSql= "CREATE TABLE Person(" +
-                        " user_idx integer primary key autoincrement " +
-                        ", user_id text not null " +
-                        ", password text not null " +
-                        ", permission text check(name IN ('common' , 'admin')) not null default 'common'" +
-                        ", cash integer not null default 0)";
-                db.execSQL(userSql);
-            case 2:
-                final String alterTable1= "ALTER TABLE user ADD COLUMN phone text";
-                final String alterTable2= "ALTER TABLE user ADD COLUMN email text";
-
-                db.execSQL(alterTable1);
-                db.execSQL(alterTable2);
-
-        }
     }
 }

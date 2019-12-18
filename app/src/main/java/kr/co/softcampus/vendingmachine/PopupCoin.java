@@ -27,7 +27,7 @@ public class PopupCoin extends AppCompatActivity {
         db= new DBExecute(this);
         //dataをもらう
         Intent intent = getIntent();
-        cash = intent.getIntExtra("cash",0);
+        cash = db.checkMoney();
 
     }
 
@@ -43,10 +43,11 @@ public class PopupCoin extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
+
         Intent intent = new Intent();
         intent.putExtra("cash",cash);
         setResult(RESULT_OK, intent);
-        db.inputCash(cash);
 
         finish();
         super.onBackPressed();
@@ -57,23 +58,28 @@ public class PopupCoin extends AppCompatActivity {
             case R.id.coin10:
                 cash+=10;
                 Log.d("test",cash+"");
+                db.inputCash(cash);
                 break;
             case R.id.coin50:
                 cash+=50;
                 Log.d("test",cash+"");
+                db.inputCash(cash);
                 break;
             case R.id.coin100:
                 cash+=100;
                 Log.d("test",cash+"");
+                db.inputCash(cash);
                 break;
             case R.id.coin500:
                 cash+=500;
                 Log.d("test",cash+"");
+                db.inputCash(cash);
                 break;
         }
 
     }
     public void clickClose(View view){
+
         Intent intent = new Intent();
         intent.putExtra("cash",cash);
         setResult(RESULT_OK, intent);
